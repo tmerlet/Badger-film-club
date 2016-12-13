@@ -12,12 +12,17 @@ const read = () => {
   return Object.keys(db).map(key => db[key]);
 };
 
+const readById = (id) => {
+  return db[id];
+};
+
 export default (seed = 0) => {
   db = {};
   uid = seed;
   return {
     uid,
     create,
-    read
+    read,
+    readById
   };
 };
