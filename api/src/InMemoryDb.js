@@ -16,6 +16,18 @@ const readById = (id) => {
   return db[id];
 };
 
+const update = (id, { title }) => {
+  const film = readById(id);
+  if (film === undefined) {
+    return undefined;
+  }
+
+  const newFilm = { id, title };
+
+  db[id] = newFilm;
+  return newFilm;
+};
+
 export default (seed = 0) => {
   db = {};
   uid = seed;
@@ -23,6 +35,7 @@ export default (seed = 0) => {
     uid,
     create,
     read,
-    readById
+    readById,
+    update
   };
 };

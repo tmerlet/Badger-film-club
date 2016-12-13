@@ -1,4 +1,3 @@
-
 import { expect } from 'chai';
 
 import InMemoryDb from './InMemoryDb';
@@ -65,6 +64,23 @@ describe('InMemoryDb', () => {
       db.create({ title: ',' });
       db.create({ title: 'World' });
       expect(db.readById(2)).to.deep.equal({ id: 2, title: ',' });
+    });
+  });
+
+  describe('.update', () => {
+    let db;
+    beforeEach(() => {
+      db = InMemoryDb();
+    })
+
+    it('returns undefined when id does not exist', () => {
+      expect(db.update(1, { title: '' })).to.deep.equal(undefined);
+    });
+
+    it('returns and persists film at id with updated title when given id exists', () => {
+      const film = db.create({ title: 'Hello' });
+      expect(db.update(film.id, { title: '💩'})).to.deep.equal({ id: 1, title: '💩'});
+      expect(db.readById(film.id)).to.deep.equal({ id: 1, title: '💩'});
     });
   });
 });
