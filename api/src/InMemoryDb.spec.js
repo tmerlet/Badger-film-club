@@ -12,12 +12,15 @@ describe('InMemoryDb', () => {
     it('returns a new film when creation is successful', () => {
       const film = { title: 'Bob' };
       expect(db.create(film)).to.deep.equal({ id: 1, title: 'Bob'});
+      expect(db.readById(1)).to.deep.equal({ id: 1, title: 'Bob'});
     });
 
     it('returns a new film at an incremented id', () => {
       db.create({ title: 'Hello' });
       const actual = db.create({ title: 'World' });
       expect(actual).to.deep.equal({ id: 2, title: 'World'});
+      expect(db.readById(1)).to.deep.equal({ id: 1, title: 'Hello'});
+      expect(db.readById(2)).to.deep.equal({ id: 2, title: 'World'});
     });
   });
 
