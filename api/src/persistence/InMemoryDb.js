@@ -6,17 +6,16 @@ let db;
 const create = ({ title }) => {
   uid++;
   const newFilm = film(uid, title);
-  db[uid] = newFilm;
+  db = {
+    ...db,
+    [uid]: newFilm
+  };
   return newFilm;
 };
 
-const read = () => {
-  return Object.keys(db).map(key => db[key]);
-};
+const read = () => Object.keys(db).map(key => db[key]);
 
-const readById = (id) => {
-  return db[id];
-};
+const readById = id => db[id];
 
 const update = (id, { title }) => {
   const existingFilm = readById(id);
@@ -26,7 +25,10 @@ const update = (id, { title }) => {
 
   const updatedFilm = film(id, title);
 
-  db[id] = updatedFilm;
+  db = {
+    ...db,
+    [id]: updatedFilm
+  };
   return updatedFilm;
 };
 
