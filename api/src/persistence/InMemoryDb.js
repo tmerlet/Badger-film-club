@@ -3,7 +3,7 @@ import { film } from '../models/film';
 let uid;
 let db;
 
-const create = ({ title }) => {
+const create = title => {
   uid++;
   const newFilm = film(uid, title);
   db = {
@@ -17,7 +17,7 @@ const read = () => Object.keys(db).map(key => db[key]);
 
 const readById = id => db[id];
 
-const update = (id, { title }) => {
+const update = (id, title) => {
   const existingFilm = readById(id);
   if (existingFilm === undefined) {
     return undefined;
