@@ -1,4 +1,4 @@
-import { film } from '../models/film';
+import { film } from '../../models/film';
 
 let uid;
 let db;

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import InMemoryDb from './InMemoryDb';
+import InMemoryDb from './';
 
 describe('InMemoryDb', () => {
 
