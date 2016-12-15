@@ -1,9 +1,11 @@
+import { film } from '../models/film';
+
 let uid;
 let db;
 
 const create = ({ title }) => {
   uid++;
-  const newFilm = { id: uid, title };
+  const newFilm = film(uid, title);
   db[uid] = newFilm;
   return newFilm;
 };
@@ -17,15 +19,15 @@ const readById = (id) => {
 };
 
 const update = (id, { title }) => {
-  const film = readById(id);
-  if (film === undefined) {
+  const existingFilm = readById(id);
+  if (existingFilm === undefined) {
     return undefined;
   }
 
-  const newFilm = { id, title };
+  const updatedFilm = film(id, title);
 
-  db[id] = newFilm;
-  return newFilm;
+  db[id] = updatedFilm;
+  return updatedFilm;
 };
 
 export default () => {
