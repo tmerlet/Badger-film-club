@@ -28,11 +28,10 @@ const update = (id, { title }) => {
   return newFilm;
 };
 
-export default (seed = 0) => {
+export default () => {
   db = {};
-  uid = seed;
+  uid = 0;
   return {
-    uid,
     create,
     read,
     readById,

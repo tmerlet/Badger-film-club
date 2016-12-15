@@ -4,11 +4,12 @@ import InMemoryDb from './InMemoryDb';
 
 describe('InMemoryDb', () => {
 
+  let db;
+  beforeEach(() => {
+    db = InMemoryDb();
+  })
+
   describe('.create', () => {
-    let db;
-    beforeEach(() => {
-      db = InMemoryDb();
-    })
     it('returns a new film when creation is successful', () => {
       const film = { title: 'Bob' };
       expect(db.create(film)).to.deep.equal({ id: 1, title: 'Bob'});
@@ -25,11 +26,6 @@ describe('InMemoryDb', () => {
   });
 
   describe('.read', () => {
-    let db;
-    beforeEach(() => {
-      db = InMemoryDb();
-    })
-
     it('returns empty object when no films exist', () => {
       expect(db.read()).to.deep.equal([]);
     });
@@ -48,11 +44,6 @@ describe('InMemoryDb', () => {
   });
 
   describe('.readById', () => {
-    let db;
-    beforeEach(() => {
-      db = InMemoryDb();
-    })
-
     it('returns undefined when id does not exist', () => {
       expect(db.readById(1)).to.deep.equal(undefined);
     });
@@ -71,11 +62,6 @@ describe('InMemoryDb', () => {
   });
 
   describe('.update', () => {
-    let db;
-    beforeEach(() => {
-      db = InMemoryDb();
-    })
-
     it('returns undefined when id does not exist', () => {
       expect(db.update(1, { title: '' })).to.deep.equal(undefined);
     });
