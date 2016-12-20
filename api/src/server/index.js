@@ -40,7 +40,7 @@ export default (db, port) => {
       return res.status(400).send({ message: `No title supplied to update film: ${id}` });
     }
 
-    const updatedFilm = db.update(id, title);
+    const updatedFilm = db.update(parseInt(id), title);
 
     if (updatedFilm === undefined) {
       return res.status(404).send({ message: `${id} not found` });

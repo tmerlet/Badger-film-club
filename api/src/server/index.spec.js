@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import request from 'supertest';
 
 import app from './';
@@ -85,9 +86,10 @@ describe('films', () => {
   describe('PUT /films/:id', () => {
     let server;
     let req;
+    let db;
 
     before(() => {
-      const db = InMemoryDb();
+      db = InMemoryDb();
       db.create('The Wizard of Oz (1939)');
       db.create('All About Eve (1950)');
       db.create('Inside Out (2015)');
@@ -104,7 +106,10 @@ describe('films', () => {
         .expect('Content-Type', /json/)
         .expect('Location', 'films/1')
         .expect(200, { id: 1, title: 'Hello, world!' })
-        .end(done);
+        .end(() => {
+          expect(db.readById(1)).to.eql({ id: 1, title: 'Hello, world!' });
+          done();
+        });
     });
 
     it('responds with status code 404 when film id does not exist', (done) => {
@@ -129,9 +134,10 @@ describe('films', () => {
   describe('POST /films', () => {
     let server;
     let req;
+    let db;
 
     before(() => {
-      const db = InMemoryDb();
+      db = InMemoryDb();
       db.create('The Wizard of Oz (1939)');
       db.create('All About Eve (1950)');
       db.create('Inside Out (2015)');
@@ -148,7 +154,10 @@ describe('films', () => {
         .expect('Location', 'films/4')
         .expect('Content-Type', /json/)
         .expect(201, { id: 4, title: 'Hello, world!' })
-        .end(done);
+        .end(() => {
+          expect(db.readById(4)).to.eql({ id: 4, title: 'Hello, world!' });
+          done();
+        });
     });
 
     it('responds with status code 400 when title is not supplied', (done) => {
