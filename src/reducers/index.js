@@ -1,4 +1,3 @@
-// AGAIN ACTION TYPES SHOULD BE IMPORTED AND NOT HARDCODED STRINGS
 export default (state = {}, action) => {
   switch (action.type) {
 

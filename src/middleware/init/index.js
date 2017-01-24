@@ -3,10 +3,6 @@ import { data, failure } from '../../actions';
 
 export default (store) => next => action => {
 
-// AGAIN THE TYPE SHOULD BE IMPORTED FROM actions/types
-// url shouldn't be hardcoded (read it from the environment)
-// fetch should be injected in so that we can test this logic
-// i.e. export default fetch => store => next => action { ... }
   switch (action.type) {
     case 'INIT_FETCH': {
       fetch('http://localhost:8001/films')
@@ -15,8 +11,8 @@ export default (store) => next => action => {
             return res.json();
           }
         }).then(json => {
-          // THIS TIMEOUT IS NOT NECCESSARY IT WAS JUST TO MAKE IT LOOK LIKE
-          // THE FETCH WAS TAKING A FEW SECONDS
+          // This timeout is not neccessary but it makes it look like
+          // the fetch is taking a few seconds
           setTimeout(() => {
             store.dispatch(data(json));
           }, 3000);
