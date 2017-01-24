@@ -38,7 +38,11 @@ const webpackConfig = Object.assign(developmentConfig, {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(environment) },
     }),
-    new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
+// WE SHOULD PROBABLY HAVE TWO WEBPACK CONDIGS, DEV AND PROD
+// THEN WE DONT NEED TO CHECK THE environment IN HERE
+// IF YOU MAKE webpack.config.dev.js THEN YOU NEED TO POINT THE webpackDevServer to use that config
+// in the npm run dev script inside of package.json
+    // new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
     new ExtractTextPlugin('style.css'),
     new CopyWebpackPlugin([{ from: 'public/index.html', to: 'index.html' }]),
   ],
