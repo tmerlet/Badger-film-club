@@ -1,16 +1,19 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 export default (db, port) => {
 
   const app = express();
 
+  app.use(cors());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
   app.get('/films', (req, res) => res.status(200).send(db.read()));
 
   app.get('/films/:id', (req, res) => {
+    console.log(req);
     const { id } = req.params;
     const film = db.readById(id);
     if (film === undefined) {
