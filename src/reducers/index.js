@@ -6,7 +6,7 @@ export default (state = {}, action) => {
       return state;
     }
 
-    case 'DATA': {
+    case 'GET_FILMS': {
       const { json } = action.payload;
       return {
         ...state,

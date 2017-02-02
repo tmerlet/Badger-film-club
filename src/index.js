@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+import fetch from 'isomorphic-fetch';
+
 import { connect, Provider } from 'react-redux';
 import { applyMiddleware, bindActionCreators, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -19,11 +21,13 @@ const initialState = {
   films: [],
 };
 
+const filmsApi = process.env['FILMS_API'];
+
 const store = createStore(
   reducers,
   initialState,
   composeWithDevTools(
-    applyMiddleware(init)
+    applyMiddleware(init(fetch, filmsApi))
   )
 );
 
