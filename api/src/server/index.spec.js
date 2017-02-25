@@ -171,4 +171,39 @@ describe('films', () => {
         .end(done);
     });
   });
+
+  describe('DELETE /films/:id', () => {
+    let server;
+    let req;
+    let db;
+
+    before(() => {
+      db = InMemoryDb();
+      db.create('The Wizard of Oz (1939)');
+      db.create('All About Eve (1950)');
+      db.create('Inside Out (2015)');
+      server = app(db, 8080);
+      req = request(server);
+    });
+
+    after(() => server.close());
+
+    it('responds with status code 404 if film does not exist', (done) => {
+      req
+        .delete('/films/4')
+        .expect(404, {message: 'film with id: 4 does not exist'})
+        .end(done);
+    });
+
+    it('deletes the film from the database', (done) => {
+      req
+        .delete('/films/1')
+        .expect(200, { message: 'film with id: 1 deleted successfully' })
+        .end((e) => {
+          if (e) { return done(e) };
+          expect(db.readById(1)).to.eql(undefined);
+          done();
+        });
+    });
+  })
 });

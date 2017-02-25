@@ -52,6 +52,18 @@ export default (db, port) => {
     }
   });
 
+  app.delete('/films/:id', (req, res) => {
+    const { id } = req.params;
+
+    if (db.readById(id) === undefined) {
+      return res.status(404).send({ message: `film with id: ${id} does not exist` });
+    }
+
+    const deletedFilm = db.remove(parseInt(id));
+    return res.status(200).send({ message: `film with id: ${id} deleted successfully`});
+
+  });
+
   return app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
   });
