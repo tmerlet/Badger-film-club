@@ -13,7 +13,6 @@ export default (db, port) => {
   app.get('/films', (req, res) => res.status(200).send(db.read()));
 
   app.get('/films/:id', (req, res) => {
-    console.log(req);
     const { id } = req.params;
     const film = db.readById(id);
     if (film === undefined) {
