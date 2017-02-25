@@ -106,7 +106,8 @@ describe('films', () => {
         .expect('Content-Type', /json/)
         .expect('Location', 'films/1')
         .expect(200, { id: 1, title: 'Hello, world!' })
-        .end(() => {
+        .end((e) => {
+          if (e) { return done(e) };
           expect(db.readById(1)).to.eql({ id: 1, title: 'Hello, world!' });
           done();
         });
@@ -154,7 +155,8 @@ describe('films', () => {
         .expect('Location', 'films/4')
         .expect('Content-Type', /json/)
         .expect(201, { id: 4, title: 'Hello, world!' })
-        .end(() => {
+        .end((e) => {
+          if (e) { return done(e) };
           expect(db.readById(4)).to.eql({ id: 4, title: 'Hello, world!' });
           done();
         });
