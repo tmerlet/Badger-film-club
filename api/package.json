@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node src/index.js",
-    "test": "mocha \"src/**/*spec.js\" --recursive --compilers js:babel-register"
+    "test": "mocha \"src/**/*spec.js\" --recursive --compilers js:babel-register",
+    "test:watch": "npm test -- -w"
   },
   "author": "",
   "license": "ISC",
