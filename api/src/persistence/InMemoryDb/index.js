@@ -33,10 +33,8 @@ const update = (id, title) => {
 };
 
 export default () => {
-  db = {
-    0: 'PENGUINS'
-  };
-  uid = 1;
+  db = {};
+  uid = 0;
   return {
     create,
     read,
