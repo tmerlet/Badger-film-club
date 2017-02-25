@@ -19,18 +19,31 @@ const readById = id => db[id];
 
 const update = (id, title) => {
   const existingFilm = readById(id);
+
   if (existingFilm === undefined) {
     return undefined;
   }
 
   const updatedFilm = film(id, title);
-
   db = {
     ...db,
     [id]: updatedFilm
   };
+
   return updatedFilm;
 };
+
+const remove = (id) => {
+  const existingFilm = readById(id);
+  if (!existingFilm) {
+    return null
+  } else {
+    db = {
+      ...db,
+      [id]: undefined
+    }
+  }
+}
 
 export default () => {
   db = {};
@@ -39,6 +52,7 @@ export default () => {
     create,
     read,
     readById,
-    update
+    update,
+    remove
   };
 };

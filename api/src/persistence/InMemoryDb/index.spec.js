@@ -72,4 +72,17 @@ describe('InMemoryDb', () => {
       expect(db.readById(film.id)).to.deep.equal({ id: 1, title: '💩'});
     });
   });
+
+  describe('.remove', () => {
+    it('returns null when id does not exist in DB', () => {
+      expect(db.remove(12)).to.equal(null);
+    });
+
+    it('expects a film to be removed when passed the id of an existing film', () => {
+      const title = 'Bob';
+      db.create('Bob');
+      expect(db.remove(1)).not.to.equal(null);
+      expect(db.readById(1)).to.deep.equal(undefined);
+    });
+  });
 });
