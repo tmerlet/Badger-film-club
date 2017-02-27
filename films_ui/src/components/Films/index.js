@@ -7,7 +7,7 @@ const Films = (props) => {
     <div>
       {props.films.map((film, index) => {
 
-        return <H1 key={`${index}-film`}>{film}</H1>
+        return <H1 key={`${index}-film`}>{film.title}</H1>
       })}
 
       {props.films.length === 0 &&
