@@ -19,6 +19,7 @@ const node = document.getElementById('mount');
 
 const initialState = {
   films: [],
+  loading: true,
 };
 
 const filmsApi = process.env['FILMS_API'] || 'http://localhost:8001/films';
