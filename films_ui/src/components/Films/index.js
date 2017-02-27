@@ -1,25 +1,25 @@
 import React, { PropTypes } from 'react';
 
-const Films = (props) => {
+const renderFilms = films => {
+  if (films.length > 0) {
+    return (
+      <ul>
+        {films.map((film) => {
+          return <li key={`film-${film.id}`}>{film.title}</li>;
+        })}
+      </ul>
+    );
+  }
+
+  return <p>No films!</p>;
+};
+
+const Films = ({ films, loading }) => {
   return (
     <div>
-      {props.loading &&
-        'Loading!'
-      }
-
-      {!props.loading &&
-        <div>
-          {props.films.length > 0 &&
-            <ul>
-              {props.films.map((film) => {
-                return <li key={`film-${film.id}`}>{film.title}</li>;
-              })}
-            </ul>
-          }
-          {props.films.length === 0 &&
-            <div>No films!</div>
-          }
-        </div>
+      {loading
+        ? <p>Loading!</p>
+        : renderFilms(films)
       }
     </div>
   );
