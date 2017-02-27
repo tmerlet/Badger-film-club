@@ -1,20 +1,17 @@
-import React from 'react';
-
-import H1 from '../H1';
+import React, { PropTypes } from 'react';
 
 const Films = (props) => {
   return (
     <div>
-      {props.films.map((film, index) => {
-
-        return <H1 key={`${index}-film`}>{film.title}</H1>
-      })}
-
-      {props.films.length === 0 &&
-        <H1>Loading 💡</H1>
+      {props.loading &&
+        'Loading!'
       }
     </div>
   );
-}
+};
+
+Films.propTypes = {
+  loading: PropTypes.bool,
+};
 
 export default Films;
