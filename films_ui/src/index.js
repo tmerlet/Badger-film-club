@@ -21,7 +21,7 @@ const initialState = {
   films: [],
 };
 
-const filmsApi = process.env['FILMS_API'];
+const filmsApi = process.env['FILMS_API'] || 'http://localhost:8001/films';
 
 const store = createStore(
   reducers,
