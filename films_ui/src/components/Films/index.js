@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Form from '../Form';
 
 const renderFilms = films => {
   if (films.length > 0) {
@@ -21,6 +22,7 @@ const Films = ({ films, loading }) => {
         ? <p>Loading!</p>
         : renderFilms(films)
       }
+      <Form />
     </div>
   );
 };
