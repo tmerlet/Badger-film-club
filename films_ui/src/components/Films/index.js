@@ -15,19 +15,22 @@ const renderFilms = films => {
   return <p>No films!</p>;
 };
 
-const Films = ({ films, loading }) => {
+const Films = ({ actions, films, loading }) => {
   return (
     <div>
       {loading
         ? <p>Loading!</p>
         : renderFilms(films)
       }
-      <Form />
+      <Form createFilm={actions.createFilm}/>
     </div>
   );
 };
 
 Films.propTypes = {
+  actions: PropTypes.shape({
+    createFilm: PropTypes.func,
+  }),
   films: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

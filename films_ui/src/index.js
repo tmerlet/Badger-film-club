@@ -10,6 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import * as Actions from './actions';
 
 import init from './middleware/init';
+import addFilm from './middleware/addFilm'
 
 import reducers from './reducers';
 
@@ -28,7 +29,10 @@ const store = createStore(
   reducers,
   initialState,
   composeWithDevTools(
-    applyMiddleware(init(fetch, filmsApi))
+    applyMiddleware(
+      init(fetch, filmsApi),
+      addFilm(fetch, filmsApi)
+    )
   )
 );
 
