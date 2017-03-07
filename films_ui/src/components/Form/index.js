@@ -1,31 +1,35 @@
 import React, { Component, PropTypes } from 'react';
 
 class Form extends Component {
+
   constructor(props) {
     super(props);
-    this.state = { value: '' }
+    this.state = { title: '' };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange (event) {
-    this.setState({ value: event.target.value })
+    this.setState({ title: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.createFilm(this.state.value)
+    this.props.createFilm(this.state.title);
   }
 
   render () {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
-        Add a film to the database:
-        </label>
-        <input type="text" value={this.state.value} onChange={this.handleChange} />
-        <input type="submit" value="Submit"/>
+        <label htmlFor="newTitle">Add a film to the database:</label>
+        <input
+          id="newTitle"
+          onChange={this.handleChange}
+          type="text"
+          value={this.state.title}
+        />
+        <button type="submit">Submit</button>
       </form>
     )
   }

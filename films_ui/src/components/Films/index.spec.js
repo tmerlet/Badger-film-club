@@ -6,15 +6,19 @@ import Films from './';
 
 describe('Films', () => {
 
+  const actions = {};
+
   describe('loading message', () => {
 
     it('renders when loading is true', () => {
-      const component = shallow(<Films loading />);
+      const component = shallow(<Films actions={actions} loading />);
       expect(component.html()).to.contain('Loading!');
     });
 
     it('does not render when loading is false', () => {
-      const component = shallow(<Films films={[]} loading={false} />);
+      const component = shallow(
+        <Films actions={actions} films={[]} loading={false} />
+      );
       expect(component.html()).to.not.contain('Loading!');
     });
 
@@ -23,6 +27,7 @@ describe('Films', () => {
   it('renders given film when loading is false', () => {
     const component = shallow(
       <Films
+        actions={actions}
         films={[{ id: 0, title: 'chicken' }]}
         loading={false}
       />
@@ -35,6 +40,7 @@ describe('Films', () => {
   it('renders given films when loading is false', () => {
     const component = shallow(
       <Films
+        actions={actions}
         films={[{ id: 0, title: 'chicken' }, { id: 1, title: 'shard' }]}
         loading={false}
       />
@@ -48,6 +54,7 @@ describe('Films', () => {
   it('renders a no films message when loading is false and films is empty', () => {
     const component = shallow(
       <Films
+        actions={actions}
         films={[]}
         loading={false}
       />

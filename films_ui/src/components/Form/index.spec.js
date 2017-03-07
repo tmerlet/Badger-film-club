@@ -5,7 +5,7 @@ import { shallow, mount } from 'enzyme';
 
 import Form from './';
 
-describe.only('Form', () => {
+describe('Form', () => {
   const shallowRenderedComponent = (props) => shallow(<Form { ...props }/>);
 
   it('renders a Form tag', () => {

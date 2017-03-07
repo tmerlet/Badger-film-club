@@ -1,5 +1,6 @@
-import { GET_FILMS, FAILURE, CREATE_FILM } from './types';
+import { CREATE_FILM, FAILURE, GET_FILMS, GET_FILMS_SUCCESS } from './types';
 
-export const getFilms = (json) => ({ type: GET_FILMS, payload: { json } });
 export const createFilm = (title) => ({ type: CREATE_FILM, payload: { title } });
+export const getFilms = () => ({ type: GET_FILMS });
+export const getFilmsSuccess = (films) => ({ type: GET_FILMS_SUCCESS, payload: { films } });
 export const failure = (error) => ({ type: FAILURE, payload: { error } });

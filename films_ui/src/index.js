@@ -4,13 +4,12 @@ import { render } from 'react-dom';
 import fetch from 'isomorphic-fetch';
 
 import { connect, Provider } from 'react-redux';
-import { applyMiddleware, bindActionCreators, createStore } from 'redux';
+import { bindActionCreators, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import * as Actions from './actions';
 
-import init from './middleware/init';
-import addFilm from './middleware/addFilm'
+import middleware from './middleware'
 
 import reducers from './reducers';
 
@@ -23,17 +22,12 @@ const initialState = {
   loading: true,
 };
 
-const filmsApi = process.env['FILMS_API'] || 'http://localhost:8001/films';
+const filmsUrl = process.env['FILMS_API'] || 'http://localhost:8001/films';
 
 const store = createStore(
   reducers,
   initialState,
-  composeWithDevTools(
-    applyMiddleware(
-      init(fetch, filmsApi),
-      addFilm(fetch, filmsApi)
-    )
-  )
+  composeWithDevTools(middleware(filmsUrl))
 );
 
 const mapStateToProps = state => state;
@@ -42,5 +36,5 @@ const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(Actions,
 const App = connect(mapStateToProps, mapDispatchToProps)(Films);
 
 render(<Provider store={store}><App /></Provider>, node);
-// ACTION SHOULD BE IMPORTED FROM ACTIONS
-store.dispatch({type: 'INIT_FETCH'})
+
+store.dispatch(Actions.getFilms())
