@@ -78,6 +78,7 @@ describe('films', () => {
       req
         .get('/films/1')
         .expect('Content-Type', /json/)
+        .expect('Location', 'films/1')
         .expect(200, { id: 1, title: 'The Wizard of Oz (1939)' })
         .end(done);
     });

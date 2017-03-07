@@ -19,7 +19,7 @@ export default (db, port) => {
       return res.status(404).send({ message: `${id} not found` });
 
     } else {
-      return res.status(200).send(film);
+      return res.status(200).location(`films/${film.id}`).send(film);
     }
   });
 
