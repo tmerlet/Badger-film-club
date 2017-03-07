@@ -16,7 +16,10 @@ class Form extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.createFilm(this.state.title);
+    if (this.state.title != '') {
+      this.props.createFilm(this.state.title);
+      this.setState({ title: '' })
+    }
   }
 
   render () {
